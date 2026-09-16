@@ -22,6 +22,7 @@ public class Intake{
         this.Intake1.setDirection(FORWARD);
         this.Intake2.setDirection(REVERSE);
 
-
+        this.Intake1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.Intake2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
