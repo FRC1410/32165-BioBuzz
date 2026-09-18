@@ -10,19 +10,24 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake{
-    private DcMotorEx Intake1;
-    private DcMotorEx Intake2;
+    private DcMotorEx intake1;
+    private DcMotorEx intake2;
     public void init(HardwareMap hardwareMap){
-        this.Intake1 = hardwareMap.get(DcMotorEx.class, INTAKE1_MOTOR_ID );
-        this.Intake2 = hardwareMap.get(DcMotorEx.class, INTAKE2_MOTOR_ID );
+        this.intake1 = hardwareMap.get(DcMotorEx.class, INTAKE1_MOTOR_ID );
+        this.intake2 = hardwareMap.get(DcMotorEx.class, INTAKE2_MOTOR_ID );
 
-        this.Intake1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        this.Intake2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.intake1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.intake2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        this.Intake1.setDirection(FORWARD);
-        this.Intake2.setDirection(REVERSE);
+        this.intake1.setDirection(FORWARD);
+        this.intake2.setDirection(REVERSE);
 
-        this.Intake1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        this.Intake2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.intake1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.intake2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void runIntake(double motorSpeeds){
+        this.intake1.setVelocity(motorSpeeds);
+        this.intake2.setVelocity(motorSpeeds);
     }
 }
