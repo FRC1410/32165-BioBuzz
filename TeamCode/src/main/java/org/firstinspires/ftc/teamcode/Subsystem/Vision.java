@@ -1,5 +1,9 @@
 package org.firstinspires.ftc.teamcode.Subsystem;
 
+import static org.firstinspires.ftc.teamcode.Util.IDs.CAM_ID;
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.vision.VisionPortal;
 
 public class Vision {
@@ -9,8 +13,8 @@ public class Vision {
 
 
 
-    public Vision() {
-
+    public Vision(HardwareMap hardwareMap) {
+        vision_portal = hardwareMap.get(VisionPortal.class, CAM_ID);
     }
 
     private double[] findDistX
