@@ -102,7 +102,7 @@ public class Turret {
      * Sets the position for the servo to go to
      * @param state state for the hood to go to (UP, HALFWAY, or LOW)
      */
-    public void setHoodServoPos(HoodStates state) { //TODO: Make this state based with discreet positions with buttons for each pos
+    public void setHoodServoPos(HoodStates state) {
         switch (state) {
             case UP -> hoodServo.setPosition(1);
             case HALFWAY -> hoodServo.setPosition(0.5);
