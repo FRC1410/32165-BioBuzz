@@ -31,7 +31,6 @@ public class Robot extends OpMode {
             controlScheme.DRIVE_SLOW_MODE.get()
         );
 
-        this.turret.shootTurret(controlScheme.SHOOT_TURRET.get());
         this.turret.setTargetPos(
             (Math.atan2(
                 controlScheme.SPIN_TURRET_Y.get(), controlScheme.SPIN_TURRET_X.get()

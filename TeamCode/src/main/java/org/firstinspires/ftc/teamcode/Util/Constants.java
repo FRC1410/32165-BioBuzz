@@ -32,5 +32,7 @@ public class Constants {
         Servo.Direction         HOOD_SERVO_DIRECTION  = Servo.Direction.FORWARD;
 
         double TICKS_PER_TURRET_REVOLUTION = THROUGH_BORE_TICKS_PER_REVOLUTION * 5;
+
+        double TURRET_MAX_SPEED = TICKS_PER_REVOLUTION * 40;
     }
 }

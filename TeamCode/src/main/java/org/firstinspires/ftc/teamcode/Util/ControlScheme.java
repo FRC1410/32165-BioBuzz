@@ -13,7 +13,9 @@ public class ControlScheme {
     public Supplier<Double> SPIN_TURRET_X;
     public Supplier<Double> SPIN_TURRET_Y;
 
-    public Supplier<Double> TURRET_HOOD_ANGLE;
+    public Supplier<Boolean> TURRET_HOOD_LOW;
+    public Supplier<Boolean> TURRET_HOOD_HALF;
+    public Supplier<Boolean> TURRET_HOOD_HIGH;
 
     public void initDriver(Gamepad gamepad1) {
         DRIVE_STRAFE = () -> gamepad1.left_stick_x;
@@ -26,7 +28,9 @@ public class ControlScheme {
         SHOOT_TURRET  = () -> (double) gamepad2.right_trigger;
         SPIN_TURRET_X = () -> (double) gamepad2.right_stick_x;
         SPIN_TURRET_Y = () -> (double) gamepad2.right_stick_y;
-        TURRET_HOOD_ANGLE = () -> (double) gamepad2.left_trigger;
+        TURRET_HOOD_LOW = () -> (boolean) gamepad2.a;
+        TURRET_HOOD_HALF = () -> (boolean) gamepad2.b;
+        TURRET_HOOD_HIGH = () -> (boolean) gamepad2.x;
     }
 
 }

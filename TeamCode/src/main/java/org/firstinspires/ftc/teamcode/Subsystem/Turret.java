@@ -4,6 +4,7 @@ import static org.firstinspires.ftc.teamcode.Util.Constants.THROUGH_BORE_TICKS_P
 import static org.firstinspires.ftc.teamcode.Util.Constants.Turret.*;
 import static org.firstinspires.ftc.teamcode.Util.IDs.Turret.*;
 import static org.firstinspires.ftc.teamcode.Util.Tuning.Turret.*;
+import static org.firstinspires.ftc.teamcode.Util.RobotStates.Turret.*;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -52,10 +53,15 @@ public class Turret {
 
     /**
      * Set the speed to the shooting motor
-     * @param speed speed in ticks/second
+     * @param speed speed (FULL, HALF, or STOP)
      */
-    public void shootTurret(double speed) { //TODO: Make state-based with discreet speed based on button input
-        shootMotor.setVelocity(speed);
+    public void shootTurret(TurretSpeeds speed) {
+        switch (speed){
+            case FULL -> shootMotor.setVelocity(TURRET_MAX_SPEED);
+            case HALF -> shootMotor.setVelocity(TURRET_MAX_SPEED / 2);
+            case STOP -> shootMotor.setVelocity(0);
+        }
+
     }
 
     /**
@@ -94,9 +100,13 @@ public class Turret {
 
     /**
      * Sets the position for the servo to go to
-     * @param pos position for the servo to go to, 0.0-1.0
+     * @param state state for the hood to go to (UP, HALFWAY, or LOW)
      */
-    public void setHoodServoPos(double pos) { //TODO: Make this state based with discreet positions with buttons for each pos
-        hoodServo.setPosition(pos);
+    public void setHoodServoPos(HoodStates state) { //TODO: Make this state based with discreet positions with buttons for each pos
+        switch (state) {
+            case UP -> hoodServo.setPosition(1);
+            case HALFWAY -> hoodServo.setPosition(0.5);
+            case LOW -> hoodServo.setPosition(0.1);
+        }
     }
 }

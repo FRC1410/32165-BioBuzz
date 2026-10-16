@@ -15,7 +15,7 @@ import static org.firstinspires.ftc.teamcode.Util.IDs.Drivetrain.*;
 import static org.firstinspires.ftc.teamcode.Util.Constants.*;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Util.RobotStates;
+import org.firstinspires.ftc.teamcode.Util.RobotStates.Drivetrain.*;
 
 public class Drivetrain {
 
@@ -28,7 +28,7 @@ public class Drivetrain {
     private IMU imu;
     private double[] wheelSpeeds = new double[4];
     private double maxVelocity = 4500;
-    private RobotStates.Drivetrain currentDrivetrainMode = RobotStates.Drivetrain.FULL_SPEED;
+    private DrivetrainSpeeds currentDrivetrainMode = DrivetrainSpeeds.FULL_SPEED;
     private double[] goVect = new double[2];
 
     public void init(HardwareMap hardwareMap) {
@@ -99,12 +99,12 @@ public class Drivetrain {
         }
 
         if (isHalfSpeed) {
-            this.setDrivetrainMode(RobotStates.Drivetrain.HALF_SPEED);
+            this.setDrivetrainMode(DrivetrainSpeeds.HALF_SPEED);
         } else {
-            this.setDrivetrainMode(RobotStates.Drivetrain.FULL_SPEED);
+            this.setDrivetrainMode(DrivetrainSpeeds.FULL_SPEED);
         }
 
-        if (this.getDrivetrainMode() == RobotStates.Drivetrain.HALF_SPEED) {
+        if (this.getDrivetrainMode() == DrivetrainSpeeds.HALF_SPEED) {
             this.motorFL.setPower(this.wheelSpeeds[0]);
             this.motorFR.setPower(this.wheelSpeeds[1]);
             this.motorBL.setPower(this.wheelSpeeds[2]);
@@ -138,11 +138,11 @@ public class Drivetrain {
         this.motorBR.setVelocity(encoderVelocity);
     }
 
-    public RobotStates.Drivetrain getDrivetrainMode() {
+    public DrivetrainSpeeds getDrivetrainMode() {
         return this.currentDrivetrainMode;
     }
 
-    public void setDrivetrainMode(RobotStates.Drivetrain desiredMode) {
+    public void setDrivetrainMode(DrivetrainSpeeds desiredMode) {
         this.currentDrivetrainMode = desiredMode;
     }
 
