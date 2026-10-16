@@ -10,7 +10,8 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 
-import static org.firstinspires.ftc.teamcode.Util.IDs.*;
+import static org.firstinspires.ftc.teamcode.Util.IDs.CONTROL_HUB_IMU;
+import static org.firstinspires.ftc.teamcode.Util.IDs.Drivetrain.*;
 import static org.firstinspires.ftc.teamcode.Util.Constants.*;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
