@@ -34,5 +34,13 @@ public class Constants {
         double TICKS_PER_TURRET_REVOLUTION = THROUGH_BORE_TICKS_PER_REVOLUTION * 5;
 
         double TURRET_MAX_SPEED = TICKS_PER_REVOLUTION * 40;
+
+        double SHOOTER_FULL_SPEED = 1;
+        double SHOOTER_HALF_SPEED = 0.5;
+        double SHOOTER_STOP_SPEED = 0;
+
+        double HOOD_HIGH = 1;
+        double HOOD_HALF = 0.5;
+        double HOOD_LOW  = 0;
     }
 }

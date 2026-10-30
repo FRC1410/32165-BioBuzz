@@ -9,7 +9,9 @@ public class ControlScheme {
     public Supplier<Float> DRIVE_ROTATE;
     public Supplier<Boolean> DRIVE_SLOW_MODE;
 
-    public Supplier<Double> SHOOT_TURRET;
+    public Supplier<Boolean> SHOOT_TURRET_FULL;
+    public Supplier<Boolean> SHOOT_TURRET_HALF;
+    public Supplier<Boolean> SHOOT_TURRET_STOP;
     public Supplier<Double> SPIN_TURRET_X;
     public Supplier<Double> SPIN_TURRET_Y;
 
@@ -25,11 +27,13 @@ public class ControlScheme {
     }
 
     public void initOperator(Gamepad gamepad2) {
-        SHOOT_TURRET  = () -> (double) gamepad2.right_trigger;
+        SHOOT_TURRET_FULL  = () -> (boolean) gamepad2.dpad_up;
+        SHOOT_TURRET_HALF  = () -> (boolean) gamepad2.dpad_right;
+        SHOOT_TURRET_STOP  = () -> (boolean) gamepad2.dpad_down;
         SPIN_TURRET_X = () -> (double) gamepad2.right_stick_x;
         SPIN_TURRET_Y = () -> (double) gamepad2.right_stick_y;
-        TURRET_HOOD_LOW = () -> (boolean) gamepad2.a;
-        TURRET_HOOD_HALF = () -> (boolean) gamepad2.b;
+        TURRET_HOOD_LOW = () -> (boolean) gamepad2.b;
+        TURRET_HOOD_HALF = () -> (boolean) gamepad2.a;
         TURRET_HOOD_HIGH = () -> (boolean) gamepad2.x;
     }
 

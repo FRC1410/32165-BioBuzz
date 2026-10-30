@@ -16,8 +16,8 @@ public class RobotStates {
             STOP
         }
         enum HoodStates {
-            UP,
-            HALFWAY,
+            HIGH,
+            HALF,
             LOW
         }
     }

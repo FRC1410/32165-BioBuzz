@@ -11,16 +11,19 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Util.PIDController;
 
 public class Turret {
     private DcMotorEx spinMotor;
     private DcMotorEx shootMotor;
     private Servo hoodServo;
-    private PIDController controller = new PIDController(TURRET_SPIN_P, TURRET_SPIN_I, TURRET_SPIN_D);
+    private final PIDController controller = new PIDController(TURRET_SPIN_P, TURRET_SPIN_I, TURRET_SPIN_D);
     private double targetPos;
 
-    public void init(HardwareMap hardwareMap) {
+    private Telemetry telemetry;
+
+    public void init(HardwareMap hardwareMap, Telemetry _telemetry) {
         spinMotor = hardwareMap.get(DcMotorEx.class, TURRET_SPIN_MOTOR_ID);
         shootMotor = hardwareMap.get(DcMotorEx.class, TURRET_SHOOT_MOTOR_ID);
 
@@ -40,6 +43,8 @@ public class Turret {
 
         hoodServo.setDirection(HOOD_SERVO_DIRECTION);
 
+        telemetry = _telemetry;
+
         targetPos = 0;
     }
 
@@ -52,16 +57,24 @@ public class Turret {
     }
 
     /**
+     * Set the speed of the shooter spin
+     * @param speed speed of shooter (1-0)
+     */
+    public void shootTurret(double speed) {
+        shootMotor.setPower(speed);
+        telemetry.addData("Target Shooter Speed: ", speed);
+    }
+
+    /**
      * Set the speed to the shooting motor
      * @param speed speed (FULL, HALF, or STOP)
      */
     public void shootTurret(TurretSpeeds speed) {
         switch (speed){
-            case FULL -> shootMotor.setVelocity(TURRET_MAX_SPEED);
-            case HALF -> shootMotor.setVelocity(TURRET_MAX_SPEED / 2);
-            case STOP -> shootMotor.setVelocity(0);
+            case FULL -> shootMotor.setVelocity(SHOOTER_FULL_SPEED);
+            case HALF -> shootMotor.setVelocity(SHOOTER_HALF_SPEED);
+            case STOP -> shootMotor.setVelocity(SHOOTER_STOP_SPEED);
         }
-
     }
 
     /**
@@ -95,18 +108,22 @@ public class Turret {
         controller.setIntegral(Math.min(controller.getIntegral(), TICKS_PER_TURRET_REVOLUTION * 3));
         double calc = controller.calculate(targetPos, spinMotor.getCurrentPosition());
 
-        this.spinMotor.setVelocity(calc);
+        telemetry.addData("Calculation: ", calc);
+        telemetry.addData("Current Pos: ", spinMotor.getCurrentPosition());
+        telemetry.addData("Desired Pos: ", targetPos);
+
+        this.spinMotor.setPower(calc);
     }
 
     /**
      * Sets the position for the servo to go to
-     * @param state state for the hood to go to (UP, HALFWAY, or LOW)
+     * @param state state for the hood to go to (HIGH, HALF, or LOW)
      */
     public void setHoodServoPos(HoodStates state) {
         switch (state) {
-            case UP -> hoodServo.setPosition(1);
-            case HALFWAY -> hoodServo.setPosition(0.5);
-            case LOW -> hoodServo.setPosition(0.1);
+            case HIGH -> hoodServo.setPosition(HOOD_HIGH);
+            case HALF -> hoodServo.setPosition(HOOD_HALF);
+            case LOW  -> hoodServo.setPosition(HOOD_LOW );
         }
     }
 }
