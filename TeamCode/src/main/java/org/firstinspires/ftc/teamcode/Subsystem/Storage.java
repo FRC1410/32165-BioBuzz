@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystem;
 
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.FORWARD;
+import static org.firstinspires.ftc.teamcode.Util.Constants.TICKS_PER_REVOLUTION;
 import static org.firstinspires.ftc.teamcode.Util.IDs.STORAGE_MOTOR_ID;
 
 
@@ -22,6 +23,6 @@ public class Storage {
     }
 
     public void runStorage(double motorSpeeds) {
-        this.storage1.setVelocity(motorSpeeds);
+        this.storage1.setVelocity(motorSpeeds * TICKS_PER_REVOLUTION);
     }
 }
