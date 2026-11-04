@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Subsystem;
 
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.FORWARD;
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
+import static org.firstinspires.ftc.teamcode.Util.Constants.TICKS_PER_REVOLUTION;
 import static org.firstinspires.ftc.teamcode.Util.IDs.INTAKE1_MOTOR_ID;
 import static org.firstinspires.ftc.teamcode.Util.IDs.INTAKE2_MOTOR_ID;
 
@@ -27,7 +28,7 @@ public class Intake{
     }
 
     public void runIntake(double motorSpeeds){
-        this.intake1.setVelocity(motorSpeeds);
-        this.intake2.setVelocity(motorSpeeds);
+        this.intake1.setVelocity(motorSpeeds * TICKS_PER_REVOLUTION);
+        this.intake2.setVelocity(motorSpeeds * TICKS_PER_REVOLUTION);
     }
 }
