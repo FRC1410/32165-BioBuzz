@@ -32,6 +32,6 @@ public class Robot extends OpMode {
             controlScheme.DRIVE_SLOW_MODE.get()
         );
 
-        this.intake.runIntake(controlScheme.INTAKE_SPEED.get());
+        this.intake.runIntake(controlScheme.INTAKE.get() - controlScheme.OUTTAKE.get());
     }
 }

@@ -14,8 +14,8 @@ public class Intake{
     private DcMotorEx intake1;
     private DcMotorEx intake2;
     public void init(HardwareMap hardwareMap){
-        this.intake1 = hardwareMap.get(DcMotorEx.class, INTAKE1_MOTOR_ID );
-        this.intake2 = hardwareMap.get(DcMotorEx.class, INTAKE2_MOTOR_ID );
+        this.intake1 = hardwareMap.get(DcMotorEx.class, INTAKE1_MOTOR_ID);
+        this.intake2 = hardwareMap.get(DcMotorEx.class, INTAKE2_MOTOR_ID);
 
         this.intake1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.intake2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -28,7 +28,7 @@ public class Intake{
     }
 
     public void runIntake(double motorSpeeds){
-        this.intake1.setVelocity(motorSpeeds * TICKS_PER_REVOLUTION);
-        this.intake2.setVelocity(motorSpeeds * TICKS_PER_REVOLUTION);
+        this.intake1.setPower(motorSpeeds * .4);
+        this.intake2.setPower(motorSpeeds * .4);
     }
 }
