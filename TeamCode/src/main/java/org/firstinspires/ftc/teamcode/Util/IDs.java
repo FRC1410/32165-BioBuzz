@@ -10,6 +10,10 @@ public class IDs {
     public static final String INTAKE1_MOTOR_ID= "Intake1";
     public static final String INTAKE2_MOTOR_ID="Intake2";
 
+    public interface Vision {
+        public static final String CAM_ID = "Webcam 1";
+    }
+
     public static final String CONTROL_HUB = "Control hub";
 
 }

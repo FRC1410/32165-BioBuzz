@@ -1,0 +1,71 @@
+package org.firstinspires.ftc.teamcode.Vision;
+
+import static org.firstinspires.ftc.teamcode.Vision.TagPivotPoint.hiveType.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * This is the class where we do as much of
+ * the precalculated vision math as possible
+ * to reduce time during our already
+ * constrained op mode loop
+**/
+public class VisionConstants {
+    // robot constants
+    public static final double turretRadius = 0;
+    public static final double TurretCenterOffsetX = 0;
+    public static final double TurretCenterOffsetY = 0;
+    public static final double turretStartToRobotForwardDelta = 0;
+    public static final double[] turretOffsetVector = {TurretCenterOffsetX,TurretCenterOffsetY};
+    // this stuff is thread safe bc why not
+    private static volatile boolean hasInitialised = false;
+    public static synchronized boolean inited(){return hasInitialised;}
+
+    // known constants
+    public static final double TAG_WIDTH = 3.25;
+    public static final double CAM_OFFSET_X = 1.5;
+    public static final double CAM_OFFSET_Y = 8;
+    public static final double[] TERMINAL_ANGLE_VECTOR = {1,0}; // this is for vision, and the main way we make sure that our vision code and pedro talk nicely together, NO TOUCHY.
+
+    public static final double armLength = 14.267;
+    public static final double armNormal = 1.445;
+
+    public static final double cameraPitch = 45; // in degrees
+    public static final double cameraPitchRad = Math.toRadians(cameraPitch);
+
+    public static final Map<Integer,TagPivotPoint> idPivotMap = new HashMap<>();
+
+    public static void initConstants(){
+        // this is where we put all the pivot point data for all the tags
+        // TODO: revise all of these points
+        double pivotHeight = 43.95;
+
+        double redHiveX = 60;
+        double redHiveY = 72;
+
+        double blueHiveX = 84;
+        double blueHiveY = 72;
+        // RED
+        idPivotMap.put(30, new TagPivotPoint(RED,false,redHiveX-6.5,redHiveY,pivotHeight));
+        idPivotMap.put(31, new TagPivotPoint(RED,false,redHiveX-2.75,redHiveY,pivotHeight));
+        idPivotMap.put(32, new TagPivotPoint(RED,false,redHiveX+2.75,redHiveY,pivotHeight));
+        idPivotMap.put(33, new TagPivotPoint(RED,false,redHiveX+6.5,redHiveY,pivotHeight));
+        // audience side
+        idPivotMap.put(34, new TagPivotPoint(RED,false,redHiveX-6.5,redHiveY,pivotHeight));
+        idPivotMap.put(35, new TagPivotPoint(RED,false,redHiveX-2.75,redHiveY,pivotHeight));
+        idPivotMap.put(36, new TagPivotPoint(RED,false,redHiveX+2.75,redHiveY,pivotHeight));
+        idPivotMap.put(37, new TagPivotPoint(RED,false,redHiveX+6.5,redHiveY,pivotHeight));
+        // BLUE
+        idPivotMap.put(38, new TagPivotPoint(BLUE,false,blueHiveX-6.5,blueHiveY,pivotHeight));
+        idPivotMap.put(39, new TagPivotPoint(BLUE,false,blueHiveX-2.75,blueHiveY,pivotHeight));
+        idPivotMap.put(40, new TagPivotPoint(BLUE,false,blueHiveX+2.75,blueHiveY,pivotHeight));
+        idPivotMap.put(41, new TagPivotPoint(BLUE,false,blueHiveX+6.5,blueHiveY,pivotHeight));
+        // audience side
+        idPivotMap.put(42, new TagPivotPoint(BLUE,false,blueHiveX-6.5,blueHiveY,pivotHeight));
+        idPivotMap.put(43, new TagPivotPoint(BLUE,false,blueHiveX-2.75,blueHiveY,pivotHeight));
+        idPivotMap.put(44, new TagPivotPoint(BLUE,false,blueHiveX+2.75,blueHiveY,pivotHeight));
+        idPivotMap.put(45, new TagPivotPoint(BLUE,false,blueHiveX+6.5,blueHiveY,pivotHeight));
+        hasInitialised = true;
+    }
+}
