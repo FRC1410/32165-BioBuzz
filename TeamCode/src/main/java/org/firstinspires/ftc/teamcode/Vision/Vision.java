@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Vision;
 
+import static org.firstinspires.ftc.teamcode.Util.IDs.Vision.*;
 import static org.firstinspires.ftc.teamcode.Vision.VisionConstants.*;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -27,6 +28,8 @@ public class Vision {
      */
     public Vision(HardwareMap hardwareMap) {
         try {
+            detections = new ArrayList<AprilTagSingleDetection>();
+
             VisionConstants.initConstants();
             // this defines all the wanted keys for us
             AprilTagLibrary.Builder tagLib = new AprilTagLibrary.Builder();
@@ -45,7 +48,7 @@ public class Vision {
                     .build();
             // This is the connection to the physical camera, including the id
             VisionPortal.Builder vision_portal_builder = new VisionPortal.Builder();
-            vision_portal_builder.setCamera(hardwareMap.get(WebcamName.class,"WEBCAM_ID")); // TODO: put in IDs class
+            vision_portal_builder.setCamera(hardwareMap.get(WebcamName.class, CAM_ID));
             vision_portal_builder.setCameraResolution(new Size(640, 480));
             vision_portal_builder.addProcessor(aprilTag);
 
@@ -125,10 +128,12 @@ public class Vision {
      */
     public boolean update() {
         boolean hasNewDetections = !(aprilTag.getFreshDetections() == null);
-        detections.clear();
+
         for (AprilTagDetection detection : aprilTag.getDetections()) {
             if (detection instanceof AprilTagSingleDetection) {
+                detections.clear();
                 detections.add((AprilTagSingleDetection) detection);
+                break;
             }
         }
         return hasNewDetections;
@@ -144,6 +149,14 @@ public class Vision {
             return getPoseFromTag(detections.get(0));
         } else {
             return new double[]{-1, -1};
+        }
+    }
+
+    public AprilTagSingleDetection getDetection() {
+        if (update() && !detections.isEmpty()) {
+            return detections.get(0);
+        } else {
+            return null;
         }
     }
 }
